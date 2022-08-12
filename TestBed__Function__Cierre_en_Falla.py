@@ -20,21 +20,16 @@ from Functions import *
 time.sleep(3)
 # Colocar acá el path de los archivos necesarios para la prueba
 
-"""
-#designPath = r'D:\JoseM\Cama_de_Pruebas\BancoDePruebasV38_2___V2021__Target2\BancoDePruebasV38_2___V2021__Target2.ecf'
-#hy_sensors = r'D:\JoseM\Cama_de_Pruebas\BancoDePruebasV38_2___V2021__Target2\SensoresV38_2___V2021__Target2.sig'
-#sv_template = r'D:\JoseM\Cama_de_Pruebas\Template_ScopeView__TestBed.svt'
-"""
 
 #"""
 designPath = r'D:\JoseM\Cama_de_Pruebas\BancoDePruebasV38_2___V2021__Target2__Rel_Remoto\BancoDePruebasV38_2___V2021__Target2__Rel_Remoto.ecf'
-hy_sensors = r'D:\JoseM\Cama_de_Pruebas\BancoDePruebasV38_2___V2021__Target2__Rel_Remoto\SensoresV38_2___V2021__Target2__Rel_Remoto__Full.sig'
-sv_template = r'D:\JoseM\Cama_de_Pruebas\Template_ScopeView__TestBed__Rel_Rem.svt'
+hy_sensors = r'D:\JoseM\Cama_de_Pruebas\BancoDePruebasV38_2___V2021__Target2__Rel_Remoto\SensoresV38_2___V2021__Target2__Cierre_En_Falla.sig'
+sv_template = r'D:\JoseM\Relé Siemens - Cama de Pruebas\Template_ScopeView__TestBed__Rel_Rem__CierreEnFalla.svt'
 #"""
 
 
 # Carpeta y path para Comtrades
-Carpeta= 'Ensayo Rel_Remoto_5_NN'                                                                              # En esta carpeta se van a descargar los archivos Comtrade que se generan en el relé
+Carpeta= 'Ensayo CierreEnFalla_1'                                                                              # En esta carpeta se van a descargar los archivos Comtrade que se generan en el relé
 pathh = 'D:\JoseM\Cama_de_Pruebas\Pruebas Fallas CID\Ensayos Automatismo Python'                     # Path de la carpeta anterior
 path2= pathh + "\\" + Carpeta
 
@@ -43,92 +38,24 @@ if not os.path.exists( path2 ):                                                 
 
 
 
+
+def Conf_CB_Ant( PosA, PosB, PosC ):
+    
+    HyWorksApi.setComponentParameter( 'CB_Recierre_Ant', 'EtatIniA', str( PosA ) ) 
+    HyWorksApi.setComponentParameter( 'CB_Recierre_Ant', 'EtatIniB', str( PosB ) ) 
+    HyWorksApi.setComponentParameter( 'CB_Recierre_Ant', 'EtatIniC', str( PosC ) ) 
+    
+
+def Conf_CB_Cerro( PosA, PosB, PosC ):
+
+    HyWorksApi.setComponentParameter( 'CB_Recierre_Cerro', 'EtatIniA', str( PosA ) ) 
+    HyWorksApi.setComponentParameter( 'CB_Recierre_Cerro', 'EtatIniB', str( PosB ) ) 
+    HyWorksApi.setComponentParameter( 'CB_Recierre_Cerro', 'EtatIniC', str( PosC ) )
+
+
+
+
 # Inicio del Automatismo que ejecuta las pruebas en Hypersim
-
-
-def search_xlw(col,string):
-    for i in range(1, 1000):
-        if string in str(sheet.range(col+'{}'.format(i)).value):
-            filmatch = i
-            break
-    return filmatch
-
-# Leer hoja de Excel con los parametros de la prueba
-sheet = xlw.Book('DISTANCE_21_POTT_JM.xlsx').sheets('Input_API')
-
-# Determina el rango de datos para las pruebas de lineas y de barras
-linrowini = search_xlw('A','lineas')+2
-linrowend = sheet.range('A'+str(linrowini)).end('down').row
-barrowini = search_xlw('A','barras')+2
-barrowend = sheet.range('A'+str(barrowini)).end('down').row
-
-# Creación de diccionario para almacenar parametros de la prueba
-Parampruebalin= {'caso':[],'tipo':[],'disporcent':[],'voltref':[],'tiempofalla':[],'tiempoclear':[],'distancia':[],'rfalla':[],'elemento':[],
-                 'fault_loc':[],'RDef':[],'EnaT1':[],'EnaT2':[],'EnaT3':[],'EnaT4':[],'T1':[],'T2':[],'T3':[],'T4':[],'T1Pa':[],'T1Pb':[],'T1Pc':[],'T1Pg':[],
-                 'T2Pa':[],'T2Pb':[],'T2Pc':[],'T2Pg':[],'T3Pa':[],'T3Pb':[],'T3Pc':[],'T3Pg':[],'T4Pa':[],'T4Pb':[],'T4Pc':[],'T4Pg':[],'t_inyect':[]}
-Parampruebabar= {'caso':[],'tipo':[],'tiempofalla':[],'tiempoclear':[],'elemento':[],'rfalla':[],'EnaT1':[],'EnaT2':[],'T1':[],'T2':[],'T1Pa':[],
-                 'T1Pb':[],'T1Pc':[],'T1Pg':[],'T2Pa':[],'T2Pb':[],'T2Pc':[],'T2Pg':[],'t_inyect':[]}
-
-# Loop para llenar diccionario de parametros de pruebas sobre líneas
-for row in range(linrowini,linrowend+1):
-    Parampruebalin['caso'].append(sheet.range('A'+str(row)).value)
-    Parampruebalin['tipo'].append(str(sheet.range('B'+str(row)).value))
-    Parampruebalin['disporcent'].append(sheet.range('C'+str(row)).value)
-    Parampruebalin['voltref'].append(str(sheet.range('D'+str(row)).value))
-    Parampruebalin['tiempofalla'].append(sheet.range('E'+str(row)).value)
-    Parampruebalin['tiempoclear'].append(sheet.range('F'+str(row)).value)
-    Parampruebalin['distancia'].append(sheet.range('G'+str(row)).value)
-    Parampruebalin['rfalla'].append(sheet.range('H'+str(row)).value)
-    Parampruebalin['elemento'].append(str(sheet.range('I'+str(row)).value))
-    Parampruebalin['fault_loc'].append(sheet.range('J'+str(row)).value)
-    Parampruebalin['RDef'].append(sheet.range('K'+str(row)).value)
-    Parampruebalin['EnaT1'].append(sheet.range('L' + str(row)).value)
-    Parampruebalin['EnaT2'].append(sheet.range('M' + str(row)).value)
-    Parampruebalin['EnaT3'].append(sheet.range('N' + str(row)).value)
-    Parampruebalin['EnaT4'].append(sheet.range('O' + str(row)).value)
-    Parampruebalin['T1'].append(sheet.range('P'+str(row)).value)
-    Parampruebalin['T2'].append(sheet.range('Q'+str(row)).value)
-    Parampruebalin['T3'].append(sheet.range('R'+str(row)).value)
-    Parampruebalin['T4'].append(sheet.range('S'+str(row)).value)
-    Parampruebalin['T1Pa'].append(int(sheet.range('T'+str(row)).value))
-    Parampruebalin['T1Pb'].append(int(sheet.range('U'+str(row)).value))
-    Parampruebalin['T1Pc'].append(int(sheet.range('V'+str(row)).value))
-    Parampruebalin['T1Pg'].append(int(sheet.range('W'+str(row)).value))
-    Parampruebalin['T2Pa'].append(int(sheet.range('X'+str(row)).value))
-    Parampruebalin['T2Pb'].append(int(sheet.range('Y'+str(row)).value))
-    Parampruebalin['T2Pc'].append(int(sheet.range('Z'+str(row)).value))
-    Parampruebalin['T2Pg'].append(int(sheet.range('AA'+str(row)).value))
-    Parampruebalin['T3Pa'].append(int(sheet.range('AB'+str(row)).value))
-    Parampruebalin['T3Pb'].append(int(sheet.range('AC'+str(row)).value))
-    Parampruebalin['T3Pc'].append(int(sheet.range('AD'+str(row)).value))
-    Parampruebalin['T3Pg'].append(int(sheet.range('AE'+str(row)).value))
-    Parampruebalin['T4Pa'].append(int(sheet.range('AF'+str(row)).value))
-    Parampruebalin['T4Pb'].append(int(sheet.range('AG'+str(row)).value))
-    Parampruebalin['T4Pc'].append(int(sheet.range('AH'+str(row)).value))
-    Parampruebalin['T4Pg'].append(int(sheet.range('AI'+str(row)).value))
-
-# Loop para llenar diccionario de parametros de pruebas sobre barras
-for row in range(barrowini,barrowend+1):
-    Parampruebabar['caso'].append(sheet.range('A'+str(row)).value)
-    Parampruebabar['tipo'].append(str(sheet.range('B'+str(row)).value))
-    Parampruebabar['tiempofalla'].append(sheet.range('C'+str(row)).value)
-    Parampruebabar['tiempoclear'].append(sheet.range('D'+str(row)).value)
-    Parampruebabar['elemento'].append(str(sheet.range('E'+str(row)).value))
-    Parampruebabar['rfalla'].append(sheet.range('F'+str(row)).value)
-    Parampruebabar['EnaT1'].append(sheet.range('G'+str(row)).value)
-    Parampruebabar['EnaT2'].append(sheet.range('H'+str(row)).value)
-    Parampruebabar['T1'].append(sheet.range('I'+str(row)).value)
-    Parampruebabar['T2'].append(sheet.range('J'+str(row)).value)
-    Parampruebabar['T1Pa'].append(int(sheet.range('K'+str(row)).value))
-    Parampruebabar['T1Pb'].append(int(sheet.range('L'+str(row)).value))
-    Parampruebabar['T1Pc'].append(int(sheet.range('M'+str(row)).value))
-    Parampruebabar['T1Pg'].append(int(sheet.range('N'+str(row)).value))
-    Parampruebabar['T2Pa'].append(int(sheet.range('O'+str(row)).value))
-    Parampruebabar['T2Pb'].append(int(sheet.range('P'+str(row)).value))
-    Parampruebabar['T2Pc'].append(int(sheet.range('Q'+str(row)).value))
-    Parampruebabar['T2Pg'].append(int(sheet.range('R'+str(row)).value))
-
-
 
 # Arrancar Hs (Hypersim), abrir el caso base, carga archivo de sensores, abre SV (Scope View),
 #  carga template de mediciones, analiza, map task, compila caso de HS, corre caso base y realiza una adquisición para el caso base
@@ -152,22 +79,13 @@ time.sleep(1)
 HyWorksApi.setComponentParameter( 'ClearLEDs', 'K', '0')
 """
 
-HyWorksApi.setComponentParameter( 'CB_Recierre_Ant', 'CmdBlockSelect', 'Internal')                      # Se apagan estos interruptores y se dejan conectados siempre para q no cambien su estado durante los casos
-HyWorksApi.setComponentParameter( 'CB_Recierre_Ant', 'EnaGen', '0')
+HyWorksApi.setComponentParameter( 'CB_Recierre_Ant', 'EnaGen', '1')                                             
+HyWorksApi.setComponentParameter( 'CB_Recierre_Ant', 'CmdBlockSelect', 'Internal')                       
+HyWorksApi.setComponentParameter( 'CB_Recierre_Cerro', 'EnaGen', '1')
 HyWorksApi.setComponentParameter( 'CB_Recierre_Cerro', 'CmdBlockSelect', 'Internal')
-HyWorksApi.setComponentParameter( 'CB_Recierre_Cerro', 'EnaGen', '0')
-
-HyWorksApi.setComponentParameter( 'CB_Recierre_Ant', 'EtatIniA', '1')                       
-HyWorksApi.setComponentParameter( 'CB_Recierre_Ant', 'EtatIniB', '1') 
-HyWorksApi.setComponentParameter( 'CB_Recierre_Ant', 'EtatIniC', '1') 
-
-HyWorksApi.setComponentParameter( 'CB_Recierre_Cerro', 'EtatIniA', '1') 
-HyWorksApi.setComponentParameter( 'CB_Recierre_Cerro', 'EtatIniB', '1') 
-HyWorksApi.setComponentParameter( 'CB_Recierre_Cerro', 'EtatIniC', '1')
 
 HyWorksApi.setComponentParameter( 'CP1', 'EnaGen', '1')
 HyWorksApi.setComponentParameter( 'CP3', 'EnaGen', '0')
-
 
 HyWorksApi.startSim()
 print('Simulacion en ejecucion... Caso base')
@@ -181,14 +99,145 @@ ScopeViewApi.setSync(True)
 ScopeViewApi.setTrig(False)
 ScopeViewApi.startAcquisition()
 print('Adquisicion... Caso base')
-
+HyWorksApi.setComponentParameter( 'CP1', 'EnaGen', '1')
+HyWorksApi.setComponentParameter( 'CP3', 'EnaGen', '0')
 time.sleep(3)
 
-Test_Time= {}
+Test_Time= []
+
+
+
+# Caso 1A__BUS: Línea abierta con falla "pegada". Se simula una prefalla y luego de 1 segundo, se cierran el interruptor BUS 
+#  para ver si la falla continúa. Se espera durante 1 segundo de posfalla y finaliza el caso. Esta joda se repite pero con el TIE
+
+print('Caso 1A: BUS')
+
+# Configurar la falla en la línea: Falla trifásica de 1 Ohm al 50% de la línea
+
+HyWorksApi.setComponentParameter( 'CP1','fault_loc', '56' )
+HyWorksApi.setComponentParameter( 'CP1','RDef', '1' )
+HyWorksApi.setComponentParameter( 'CP1','EnaT1', '1' )
+HyWorksApi.setComponentParameter( 'CP1','EnaT2', '1' )
+HyWorksApi.setComponentParameter( 'CP1','T1', '0.5' )
+HyWorksApi.setComponentParameter( 'CP1','T2', '2' )
+HyWorksApi.setComponentParameter( 'CP1','T1Pa', '1' )
+HyWorksApi.setComponentParameter( 'CP1','T1Pb', '1' )
+HyWorksApi.setComponentParameter( 'CP1','T1Pc', '1' )
+HyWorksApi.setComponentParameter( 'CP1','T1Pg', '0' )
+HyWorksApi.setComponentParameter( 'CP1','T2Pa', '1' )
+HyWorksApi.setComponentParameter( 'CP1','T2Pb', '1' )
+HyWorksApi.setComponentParameter( 'CP1','T2Pc', '1' )
+HyWorksApi.setComponentParameter( 'CP1','T2Pg', '0' )
+
+
+# Apertura de CBs
+
+HyWorksApi.setComponentParameter( 'CB_Recierre_Ant','EnaT1', '1' )
+HyWorksApi.setComponentParameter( 'CB_Recierre_Ant','EnaT2', '1' )
+HyWorksApi.setComponentParameter( 'CB_Recierre_Ant','T1', '0' )
+HyWorksApi.setComponentParameter( 'CB_Recierre_Ant','T2', '1' )
+HyWorksApi.setComponentParameter( 'CB_Recierre_Ant','T1Pa', '1' )
+HyWorksApi.setComponentParameter( 'CB_Recierre_Ant','T1Pb', '1' )
+HyWorksApi.setComponentParameter( 'CB_Recierre_Ant','T1Pc', '1' )
+HyWorksApi.setComponentParameter( 'CB_Recierre_Ant','T2Pa', '1' )
+HyWorksApi.setComponentParameter( 'CB_Recierre_Ant','T2Pb', '1' )
+HyWorksApi.setComponentParameter( 'CB_Recierre_Ant','T2Pc', '1' )
+
+HyWorksApi.setComponentParameter( 'CB_Recierre_Cerro','EnaT1', '1' )
+HyWorksApi.setComponentParameter( 'CB_Recierre_Cerro','T1', '0' )
+HyWorksApi.setComponentParameter( 'CB_Recierre_Cerro','T1Pa', '1' )
+HyWorksApi.setComponentParameter( 'CB_Recierre_Cerro','T1Pb', '1' )
+HyWorksApi.setComponentParameter( 'CB_Recierre_Cerro','T1Pc', '1' )
+
+
+ScopeViewApi.setTrig(True)
+Test_Time.append( datetime.now() )
+
+ScopeViewApi.startAcquisition()
+print( 'Tiempo de inyeccion = '+ str( Test_Time[-1] ) )
+
+HyWorksApi.loadSnapshot()
+time.sleep(25)
+ScopeViewApi.setTrig(False)
+ScopeViewApi.startAcquisition()
+
+
+
+print('Siguiente caso...')
+
+time.sleep(5)
+
+
+
+
+# Caso 1B__TIE: Línea abierta con falla "pegada". Se simula una prefalla y luego de 1 segundo, se cierran el interruptor TIE
+#  para ver si la falla continúa. Se espera durante 1 segundo de posfalla y finaliza el caso.
+
+
+print('Caso 1B: TIE')
+
+# Configurar la falla en la línea: Falla trifásica de 1 Ohm al 50% de la línea
+
+HyWorksApi.setComponentParameter( 'CP1','fault_loc', '56' )
+HyWorksApi.setComponentParameter( 'CP1','RDef', '1' )
+HyWorksApi.setComponentParameter( 'CP1','EnaT1', '1' )
+HyWorksApi.setComponentParameter( 'CP1','EnaT2', '1' )
+HyWorksApi.setComponentParameter( 'CP1','T1', '0.5' )
+HyWorksApi.setComponentParameter( 'CP1','T2', '2' )
+HyWorksApi.setComponentParameter( 'CP1','T1Pa', '1' )
+HyWorksApi.setComponentParameter( 'CP1','T1Pb', '1' )
+HyWorksApi.setComponentParameter( 'CP1','T1Pc', '1' )
+HyWorksApi.setComponentParameter( 'CP1','T1Pg', '0' )
+HyWorksApi.setComponentParameter( 'CP1','T2Pa', '1' )
+HyWorksApi.setComponentParameter( 'CP1','T2Pb', '1' )
+HyWorksApi.setComponentParameter( 'CP1','T2Pc', '1' )
+HyWorksApi.setComponentParameter( 'CP1','T2Pg', '0' )
+
+
+# Apertura de CBs
+
+HyWorksApi.setComponentParameter( 'CB_Recierre_Cerro','EnaT1', '1' )
+HyWorksApi.setComponentParameter( 'CB_Recierre_Cerro','EnaT2', '1' )
+HyWorksApi.setComponentParameter( 'CB_Recierre_Cerro','T1', '0' )
+HyWorksApi.setComponentParameter( 'CB_Recierre_Cerro','T2', '1' )
+HyWorksApi.setComponentParameter( 'CB_Recierre_Cerro','T1Pa', '1' )
+HyWorksApi.setComponentParameter( 'CB_Recierre_Cerro','T1Pb', '1' )
+HyWorksApi.setComponentParameter( 'CB_Recierre_Cerro','T1Pc', '1' )
+HyWorksApi.setComponentParameter( 'CB_Recierre_Cerro','T2Pa', '1' )
+HyWorksApi.setComponentParameter( 'CB_Recierre_Cerro','T2Pb', '1' )
+HyWorksApi.setComponentParameter( 'CB_Recierre_Cerro','T2Pc', '1' )
+
+HyWorksApi.setComponentParameter( 'CB_Recierre_Ant','EnaT1', '1' )
+HyWorksApi.setComponentParameter( 'CB_Recierre_Ant','T1', '0' )
+HyWorksApi.setComponentParameter( 'CB_Recierre_Ant','T1Pa', '1' )
+HyWorksApi.setComponentParameter( 'CB_Recierre_Ant','T1Pb', '1' )
+HyWorksApi.setComponentParameter( 'CB_Recierre_Ant','T1Pc', '1' )
+
+
+
+
+ScopeViewApi.setTrig(True)
+Test_Time.append( datetime.now() )
+
+ScopeViewApi.startAcquisition()
+print( 'Tiempo de inyeccion = '+ str( Test_Time[-1] ) )
+
+HyWorksApi.loadSnapshot()
+time.sleep(25)
+ScopeViewApi.setTrig(False)
+ScopeViewApi.startAcquisition()
+
+
+
+print('Siguiente caso...')
+
+time.sleep(5)
+
+
 
 
 #ii= 0
-# Loop para inyectar cada caso de prueba de líneas. Se leen los parámetros de cada caso y asignan a las líneas, inyecta con SV y regresa al estado estacionario inicial
+
 for caso in range(len(Parampruebalin['caso'])):
 #for caso in range( 3 ):
     
@@ -200,7 +249,7 @@ for caso in range(len(Parampruebalin['caso'])):
 
     # Carga snapshot del caso base antes de inyectar el siguiente caso
     print('Ejecutando Caso %i' %( int(Parampruebalin['caso'][caso]) ) )
-    para = 'Parametros--->'+'  Elemento-->'+str(Parampruebalin['elemento'][caso])+'  Tipo Falla-->'+str(Parampruebalin['tipo'][caso])+'  Distancia-->'+str(Parampruebalin['distancia'][caso])+'  T falla-->'+str(Parampruebalin['tiempofalla'][caso])+'  T Clear-->'+str(Parampruebalin['tiempoclear'][caso])+'  R falla-->'+str(Parampruebalin['rfalla'][caso])
+    para = 'Parametros--->'+'  Elemento-->'+str(Parampruebalin['elemento'][caso])+'  Tipo Falla-->'+str(Parampruebalin['tipo'][caso])+'  Distancia-->'+ str(Parampruebalin['distancia'][caso])+'  T falla-->'+str(Parampruebalin['tiempofalla'][caso])+'  T Clear-->'+str(Parampruebalin['tiempoclear'][caso])+'  R falla-->'+str(Parampruebalin['rfalla'][caso])
     print(para)
     # Cambiar parametros de acuerdo con el caso de falla HyWorksApi.setComponentParameter('componenete','parametro','valor')
     HyWorksApi.setComponentParameter(Parampruebalin['elemento'][caso],'fault_loc',str(Parampruebalin['fault_loc'][caso]))
