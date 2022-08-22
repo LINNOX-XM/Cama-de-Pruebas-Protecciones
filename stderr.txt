@@ -1,50 +1,74 @@
-[2022-08-12 14:45:51.110] ScopeView version: 2021.1.2
-[2022-08-12 14:45:51.110] Java version: 13.0.2
-[2022-08-12 14:45:51.111] Library path: ;C:\OPAL-RT\HYPERSIM\hypersim_2021.1.2.o150\Windows\bin;C:\OPAL-RT\HYPERSIM\hypersim_2021.1.2.o150\Windows\HyApi\C\py\hyApiPy\..\..\..\..\MinGW\bin;C:\OPAL-RT\HYPERSIM\hypersim_2021.1.2.o150\Windows\HyApi\C\py\hyApiPy\..\..\..\..\lib;D:\JoseM\Virtual_Enviroments__Python\HyperEnv\lib\site-packages\pywin32_system32;C:\Program Files\Spyder\pkgs\PyQt5\Qt\bin;C:\Program Files\Spyder\pkgs\pywin32_system32;C:\Program Files\Common Files\Siemens\Automation\Simatic OAM\bin;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files (x86)\Common Files\Siemens\Energy\TimeZoneCalculations\bin;C:\Program Files\Common Files\Siemens\Energy\TimeZoneCalculations\bin;C:\Program Files\MATLAB\R2017a\bin;C:\Program Files (x86)\MATLAB\R2015b\bin;C:\Program Files\Git\cmd;c:\opal-rt\rt-lab\2019.3.2\common\bin;c:\users\workstation03\appdata\local\programs\python\python38\scripts\;c:\users\workstation03\appdata\local\programs\python\python38\;c:\users\workstation03\appdata\local\programs\python\python39\scripts\;c:\users\workstation03\appdata\local\programs\python\python39\;c:\users\workstation03\appdata\local\programs\python\python310\scripts\;c:\users\workstation03\appdata\local\programs\python\python310\;c:\users\workstation03\appdata\local\programs\python\python37\scripts\;c:\users\workstation03\appdata\local\programs\python\python37\;C:\Users\WORKSTATION03\appdata\local\microsoft\windowsapps;;c:\users\workstation03\appdata\local\programs\microsoft vs code\bin;c:\users\workstation03\appdata\local\programs\microsoft vs code\bin;c:\users\workstation03\appdata\local\programs\microsoft vs code\bin;c:\users\workstation03\appdata\local\programs\microsoft vs code\bin;C:\Program Files\Spyder\pkgs\numpy\.libs;D:\JoseM\Virtual_Enviroments__Python\HyperEnv\lib\site-packages\numpy\.libs;C:\OPAL-RT\HYPERSIM\hypersim_2021.1.2.o150\Windows\HyApi\C\py\HyWorksApi\..\..\..\..\..\Windows\HyApi\C\lib;;C:\OPAL-RT\HYPERSIM\hypersim_2021.1.2.o150\Windows\ScopeView\bin;C:\OPAL-RT\HYPERSIM\hypersim_2021.1.2.o150\Windows\ScopeView\lib;C:\OPAL-RT\HYPERSIM\hypersim_2021.1.2.o150\Windows\ScopeView\lib\ScopeViewApi;C:\OPAL-RT\HYPERSIM\hypersim_2021.1.2.o150\Windows\ScopeView\jdk\bin;C:\OPAL-RT\HYPERSIM\hypersim_2021.1.2.o150\Windows\ScopeView\jdk\bin\server;C:\OPAL-RT\HYPERSIM\hypersim_2021.1.2.o150\Windows\bin;C:\OPAL-RT\HYPERSIM\hypersim_2021.1.2.o150\Windows\jdk\bin;C:\OPAL-RT\HYPERSIM\hypersim_2021.1.2.o150\Windows\jdk \bin\server;D:\JoseM\Virtual_Enviroments__Python\HyperEnv\lib\site-packages\scipy\.libs;;C:\OPAL-RT\HYPERSIM\hypersim_2021.1.2.o150\Windows\javafx\bin;
-[2022-08-12 14:45:51.133] Security policy: C:/OPAL-RT/HYPERSIM/hypersim_2021.1.2.o150/Windows/ScopeView/etc/rmid.policy
-[2022-08-12 14:45:51.158] RMI codebase: file:///C:/OPAL-RT/HYPERSIM/hypersim_2021.1.2.o150/Windows/ScopeView/lib/ScopeView.jar
-[2022-08-12 14:45:51.159] Starting RMI registry on port 13501
-[2022-08-12 14:45:51.197] RMI registry started.
-[2022-08-12 14:45:51.595] RMI Registry list:
-[2022-08-12 14:45:51.595] 	(no registry)
-[2022-08-12 14:45:51.614] ScopeView version: 2021.1.2
-[2022-08-12 14:45:51.614] ScopeView build: 2021.1.2.o150
-[2022-08-12 14:45:52.002] Using license path: C:\OPAL-RT\HYPERSIM\hypersim_2021.1.2.o150\Windows\ScopeView\defaults\scopeview.lic
-[2022-08-12 14:45:52.003] Using HYPERSIM licensing
-[2022-08-12 14:45:52.018] Starting remote server...
-[2022-08-12 14:45:52.095] /WORKSTATION03/ScopeView-1 active.
-[2022-08-12 14:45:52.095] Building user interface...
-[2022-08-12 14:45:52.962] Opening user interface...
-[2022-08-12 14:45:53.032] Initialization completed
-[2022-08-12 14:45:53.516] Trying to connect to Hypersim on template host: DESKTOP-PNHKHA8:1
-[2022-08-12 14:45:56.842] Connected to DESKTOP-PNHKHA8:1
-[2022-08-12 14:45:57.903] Waiting for the data acquisition to terminate...
-[2022-08-12 14:45:59.272] Hypersim Acquisition STARTED - WAITING FOR DATA
-[2022-08-12 14:46:07.341] Hypersim Acquisition DATA RECEIVED
-[2022-08-12 14:46:07.341] Packet #1 len = 235294 
-[2022-08-12 14:46:07.832] Evaluating expressions
-[2022-08-12 14:46:11.294] Updating graphs
-[2022-08-12 14:46:14.750] Waiting for the data acquisition to terminate...
-[2022-08-12 14:46:16.086] Hypersim Acquisition STARTED - WAITING FOR DATA
-[2022-08-12 14:46:24.137] Hypersim Acquisition DATA RECEIVED
-[2022-08-12 14:46:24.137] Packet #1 len = 235294 
-[2022-08-12 14:46:24.632] Evaluating expressions
-[2022-08-12 14:46:27.808] Updating graphs
-[2022-08-12 14:46:53.561] Waiting for the data acquisition to terminate...
-[2022-08-12 14:46:54.918] Hypersim Acquisition STARTED - WAITING FOR DATA
-[2022-08-12 14:47:02.748] Hypersim Acquisition DATA RECEIVED
-[2022-08-12 14:47:02.748] Packet #1 len = 235294 
-[2022-08-12 14:47:03.113] Evaluating expressions
-[2022-08-12 14:47:06.242] Updating graphs
-[2022-08-12 14:47:11.631] Waiting for the data acquisition to terminate...
-[2022-08-12 14:47:12.928] Hypersim Acquisition STARTED - WAITING FOR DATA
-[2022-08-12 14:47:20.881] Hypersim Acquisition DATA RECEIVED
-[2022-08-12 14:47:20.881] Packet #1 len = 235294 
-[2022-08-12 14:47:21.212] Evaluating expressions
-[2022-08-12 14:47:24.291] Updating graphs
-[2022-08-12 14:47:49.953] Waiting for the data acquisition to terminate...
-[2022-08-12 14:47:51.352] Hypersim Acquisition STARTED - WAITING FOR DATA
-[2022-08-12 14:47:59.213] Hypersim Acquisition DATA RECEIVED
-[2022-08-12 14:47:59.213] Packet #1 len = 235294 
-[2022-08-12 14:47:59.564] Evaluating expressions
-[2022-08-12 14:48:02.560] Updating graphs
+[2022-08-19 16:34:23.033] ScopeView version: 2021.1.2
+[2022-08-19 16:34:23.034] Java version: 13.0.2
+[2022-08-19 16:34:23.034] Library path: ;C:\OPAL-RT\HYPERSIM\hypersim_2021.1.2.o150\Windows\bin;C:\OPAL-RT\HYPERSIM\hypersim_2021.1.2.o150\Windows\HyApi\C\py\hyApiPy\..\..\..\..\MinGW\bin;C:\OPAL-RT\HYPERSIM\hypersim_2021.1.2.o150\Windows\HyApi\C\py\hyApiPy\..\..\..\..\lib;D:\JoseM\Virtual_Enviroments__Python\HyperEnv\lib\site-packages\pywin32_system32;C:\Program Files\Spyder\pkgs\PyQt5\Qt\bin;C:\Program Files\Spyder\pkgs\pywin32_system32;C:\Program Files\Common Files\Siemens\Automation\Simatic OAM\bin;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files (x86)\Common Files\Siemens\Energy\TimeZoneCalculations\bin;C:\Program Files\Common Files\Siemens\Energy\TimeZoneCalculations\bin;C:\Program Files\MATLAB\R2017a\bin;C:\Program Files (x86)\MATLAB\R2015b\bin;C:\Program Files\Git\cmd;c:\opal-rt\rt-lab\2019.3.2\common\bin;c:\users\workstation03\appdata\local\programs\python\python38\scripts\;c:\users\workstation03\appdata\local\programs\python\python38\;c:\users\workstation03\appdata\local\programs\python\python39\scripts\;c:\users\workstation03\appdata\local\programs\python\python39\;c:\users\workstation03\appdata\local\programs\python\python310\scripts\;c:\users\workstation03\appdata\local\programs\python\python310\;c:\users\workstation03\appdata\local\programs\python\python37\scripts\;c:\users\workstation03\appdata\local\programs\python\python37\;C:\Users\WORKSTATION03\appdata\local\microsoft\windowsapps;;c:\users\workstation03\appdata\local\programs\microsoft vs code\bin;c:\users\workstation03\appdata\local\programs\microsoft vs code\bin;c:\users\workstation03\appdata\local\programs\microsoft vs code\bin;c:\users\workstation03\appdata\local\programs\microsoft vs code\bin;C:\Program Files\Spyder\pkgs\numpy\.libs;D:\JoseM\Virtual_Enviroments__Python\HyperEnv\lib\site-packages\numpy\.libs;C:\OPAL-RT\HYPERSIM\hypersim_2021.1.2.o150\Windows\HyApi\C\py\HyWorksApi\..\..\..\..\..\Windows\HyApi\C\lib;;C:\OPAL-RT\HYPERSIM\hypersim_2021.1.2.o150\Windows\ScopeView\bin;C:\OPAL-RT\HYPERSIM\hypersim_2021.1.2.o150\Windows\ScopeView\lib;C:\OPAL-RT\HYPERSIM\hypersim_2021.1.2.o150\Windows\ScopeView\lib\ScopeViewApi;C:\OPAL-RT\HYPERSIM\hypersim_2021.1.2.o150\Windows\ScopeView\jdk\bin;C:\OPAL-RT\HYPERSIM\hypersim_2021.1.2.o150\Windows\ScopeView\jdk\bin\server;C:\OPAL-RT\HYPERSIM\hypersim_2021.1.2.o150\Windows\bin;C:\OPAL-RT\HYPERSIM\hypersim_2021.1.2.o150\Windows\jdk\bin;C:\OPAL-RT\HYPERSIM\hypersim_2021.1.2.o150\Windows\jdk \bin\server;D:\JoseM\Virtual_Enviroments__Python\HyperEnv\lib\site-packages\scipy\.libs;;C:\OPAL-RT\HYPERSIM\hypersim_2021.1.2.o150\Windows\javafx\bin;
+[2022-08-19 16:34:23.057] Security policy: C:/OPAL-RT/HYPERSIM/hypersim_2021.1.2.o150/Windows/ScopeView/etc/rmid.policy
+[2022-08-19 16:34:23.087] RMI codebase: file:///C:/OPAL-RT/HYPERSIM/hypersim_2021.1.2.o150/Windows/ScopeView/lib/ScopeView.jar
+[2022-08-19 16:34:23.088] Starting RMI registry on port 13501
+[2022-08-19 16:34:23.133] RMI registry started.
+[2022-08-19 16:34:23.535] RMI Registry list:
+[2022-08-19 16:34:23.535] 	(no registry)
+[2022-08-19 16:34:23.556] ScopeView version: 2021.1.2
+[2022-08-19 16:34:23.556] ScopeView build: 2021.1.2.o150
+[2022-08-19 16:34:23.987] Using license path: C:\OPAL-RT\HYPERSIM\hypersim_2021.1.2.o150\Windows\ScopeView\defaults\scopeview.lic
+[2022-08-19 16:34:23.988] Using HYPERSIM licensing
+[2022-08-19 16:34:24.006] Starting remote server...
+[2022-08-19 16:34:24.100] /WORKSTATION03/ScopeView-1 active.
+[2022-08-19 16:34:24.101] Building user interface...
+[2022-08-19 16:34:25.031] Opening user interface...
+[2022-08-19 16:34:25.109] Initialization completed
+[2022-08-19 16:34:25.770] Trying to connect to Hypersim on template host: DESKTOP-PNHKHA8:1
+[2022-08-19 16:34:29.140] Connected to DESKTOP-PNHKHA8:1
+[2022-08-19 16:34:30.123] Waiting for the data acquisition to terminate...
+[2022-08-19 16:34:31.563] Hypersim Acquisition STARTED - WAITING FOR DATA
+[2022-08-19 16:34:41.550] Hypersim Acquisition DATA RECEIVED
+[2022-08-19 16:34:41.551] Packet #1 len = 235294 
+[2022-08-19 16:34:42.112] Evaluating expressions
+[2022-08-19 16:34:44.762] Updating graphs
+[2022-08-19 16:34:48.140] Waiting for the data acquisition to terminate...
+[2022-08-19 16:34:49.374] Hypersim Acquisition STARTED - WAITING FOR DATA
+[2022-08-19 16:34:59.161] Hypersim Acquisition DATA RECEIVED
+[2022-08-19 16:34:59.162] Packet #1 len = 235294 
+[2022-08-19 16:34:59.608] Evaluating expressions
+[2022-08-19 16:35:01.886] Updating graphs
+[2022-08-19 16:35:02.607] Waiting for the data acquisition to terminate...
+[2022-08-19 16:35:03.769] Hypersim Acquisition STARTED - WAITING FOR DATA
+[2022-08-19 16:35:13.441] Hypersim Acquisition DATA RECEIVED
+[2022-08-19 16:35:13.441] Packet #1 len = 235294 
+[2022-08-19 16:35:13.726] Evaluating expressions
+[2022-08-19 16:35:16.043] Updating graphs
+[2022-08-19 16:35:41.369] Waiting for the data acquisition to terminate...
+[2022-08-19 16:35:42.535] Hypersim Acquisition STARTED - WAITING FOR DATA
+[2022-08-19 16:35:52.576] Hypersim Acquisition DATA RECEIVED
+[2022-08-19 16:35:52.576] Packet #1 len = 235294 
+[2022-08-19 16:35:52.885] Evaluating expressions
+[2022-08-19 16:35:55.085] Updating graphs
+[2022-08-19 16:35:55.805] Waiting for the data acquisition to terminate...
+[2022-08-19 16:35:56.961] Hypersim Acquisition STARTED - WAITING FOR DATA
+[2022-08-19 16:36:06.684] Hypersim Acquisition DATA RECEIVED
+[2022-08-19 16:36:06.684] Packet #1 len = 235294 
+[2022-08-19 16:36:06.931] Evaluating expressions
+[2022-08-19 16:36:09.060] Updating graphs
+[2022-08-19 16:36:34.397] Waiting for the data acquisition to terminate...
+[2022-08-19 16:36:35.601] Hypersim Acquisition STARTED - WAITING FOR DATA
+[2022-08-19 16:36:45.352] Hypersim Acquisition DATA RECEIVED
+[2022-08-19 16:36:45.352] Packet #1 len = 235294 
+[2022-08-19 16:36:45.616] Evaluating expressions
+[2022-08-19 16:36:48.242] Updating graphs
+[2022-08-19 16:36:48.870] Waiting for the data acquisition to terminate...
+[2022-08-19 16:36:50.119] Hypersim Acquisition STARTED - WAITING FOR DATA
+[2022-08-19 16:36:59.790] Hypersim Acquisition DATA RECEIVED
+[2022-08-19 16:36:59.790] Packet #1 len = 235294 
+[2022-08-19 16:37:00.055] Evaluating expressions
+[2022-08-19 16:37:04.172] Updating graphs
+[2022-08-19 16:37:29.515] Waiting for the data acquisition to terminate...
+[2022-08-19 16:37:30.865] Hypersim Acquisition STARTED - WAITING FOR DATA
+[2022-08-19 16:37:40.660] Hypersim Acquisition DATA RECEIVED
+[2022-08-19 16:37:40.661] Packet #1 len = 235294 
+[2022-08-19 16:37:40.919] Evaluating expressions
+[2022-08-19 16:37:43.393] Updating graphs
+[2022-08-19 16:37:44.017] Waiting for the data acquisition to terminate...
+[2022-08-19 16:37:45.173] Hypersim Acquisition STARTED - WAITING FOR DATA
+[2022-08-19 16:37:54.881] Hypersim Acquisition DATA RECEIVED
+[2022-08-19 16:37:54.881] Packet #1 len = 235294 
+[2022-08-19 16:37:55.159] Evaluating expressions
+[2022-08-19 16:38:00.759] Updating graphs

@@ -263,9 +263,9 @@ for caso in range(len(Parampruebalin['caso'])):
     print('Tiempo de inyeccion = '+ Parampruebalin['t_inyect'][-1])
 
     HyWorksApi.loadSnapshot()
-    time.sleep(25)
     ScopeViewApi.setTrig(False)
     ScopeViewApi.startAcquisition()
+    time.sleep(25)
     
     if Parampruebalin['caso'][caso] == 11 or Parampruebalin['caso'][caso] == 12: 
         HyWorksApi.setComponentParameter( 'CB2', 'EnaGen', '0' )
@@ -326,9 +326,9 @@ for casobar in range(len(Parampruebabar['caso'])):
     #   print colored('Snapshot de Caso base tomado', 'yellow')
     #   print colored('Cargando snapshot del caso base', 'yellow')
     HyWorksApi.loadSnapshot()
-    time.sleep(25)
     ScopeViewApi.setTrig(False)
     ScopeViewApi.startAcquisition()
+    time.sleep(25)
 
 HyWorksApi.setComponentParameter( 'Flt2', 'EnaGen', '0' )
 HyWorksApi.setComponentParameter( 'Flt3', 'EnaGen', '0' )
@@ -459,3 +459,8 @@ print( "Fin Pruebas")
 
                             
 
+"""
+for caso in DD:
+    print( caso )
+    print( DD[caso] )
+"""
