@@ -34,8 +34,8 @@ sv_template = r'D:\JoseM\Cama_de_Pruebas\Template_ScopeView__TestBed__Rel_Rem.sv
 
 
 # Carpeta y path para Comtrades
-Carpeta= 'Ensayo Rel_Remoto_5_NN'                                                                              # En esta carpeta se van a descargar los archivos Comtrade que se generan en el relé
-pathh = 'D:\JoseM\Cama_de_Pruebas\Pruebas Fallas CID\Ensayos Automatismo Python'                     # Path de la carpeta anterior
+Carpeta= 'Ensayo Rel_Remoto_6_NN'                                                                                   # En esta carpeta se van a descargar los archivos Comtrade que se generan en el relé
+pathh = 'D:\JoseM\Cama_de_Pruebas\Pruebas Fallas CID\Ensayos Automatismo Python'                                    # Path de la carpeta anterior
 path2= pathh + "\\" + Carpeta
 
 if not os.path.exists( path2 ):                                                                                     # Verifica que la carpeta anterior exista, si no, la crea
@@ -152,18 +152,18 @@ time.sleep(1)
 HyWorksApi.setComponentParameter( 'ClearLEDs', 'K', '0')
 """
 
-HyWorksApi.setComponentParameter( 'CB_Recierre_Ant', 'CmdBlockSelect', 'Internal')                      # Se apagan estos interruptores y se dejan conectados siempre para q no cambien su estado durante los casos
-HyWorksApi.setComponentParameter( 'CB_Recierre_Ant', 'EnaGen', '0')
-HyWorksApi.setComponentParameter( 'CB_Recierre_Cerro', 'CmdBlockSelect', 'Internal')
-HyWorksApi.setComponentParameter( 'CB_Recierre_Cerro', 'EnaGen', '0')
+HyWorksApi.setComponentParameter( 'CB_Aux_Ant', 'CmdBlockSelect', 'Internal')                      # Se apagan estos interruptores y se dejan conectados siempre para q no cambien su estado durante los casos
+HyWorksApi.setComponentParameter( 'CB_Aux_Ant', 'EnaGen', '0')
+HyWorksApi.setComponentParameter( 'CB_Aux_Cerro', 'CmdBlockSelect', 'Internal')
+HyWorksApi.setComponentParameter( 'CB_Aux_Cerro', 'EnaGen', '0')
 
-HyWorksApi.setComponentParameter( 'CB_Recierre_Ant', 'EtatIniA', '1')                       
-HyWorksApi.setComponentParameter( 'CB_Recierre_Ant', 'EtatIniB', '1') 
-HyWorksApi.setComponentParameter( 'CB_Recierre_Ant', 'EtatIniC', '1') 
+HyWorksApi.setComponentParameter( 'CB_Aux_Ant', 'EtatIniA', '1')                       
+HyWorksApi.setComponentParameter( 'CB_Aux_Ant', 'EtatIniB', '1') 
+HyWorksApi.setComponentParameter( 'CB_Aux_Ant', 'EtatIniC', '1') 
 
-HyWorksApi.setComponentParameter( 'CB_Recierre_Cerro', 'EtatIniA', '1') 
-HyWorksApi.setComponentParameter( 'CB_Recierre_Cerro', 'EtatIniB', '1') 
-HyWorksApi.setComponentParameter( 'CB_Recierre_Cerro', 'EtatIniC', '1')
+HyWorksApi.setComponentParameter( 'CB_Aux_Cerro', 'EtatIniA', '1') 
+HyWorksApi.setComponentParameter( 'CB_Aux_Cerro', 'EtatIniB', '1') 
+HyWorksApi.setComponentParameter( 'CB_Aux_Cerro', 'EtatIniC', '1')
 
 HyWorksApi.setComponentParameter( 'CP1', 'EnaGen', '1')
 HyWorksApi.setComponentParameter( 'CP3', 'EnaGen', '0')
@@ -193,7 +193,7 @@ for caso in range(len(Parampruebalin['caso'])):
 #for caso in range( 3 ):
     
     #ii += 1
-    #caso= 7+ii
+    #caso= 5+ii
 
     HyWorksApi.setComponentParameter( 'CP1', 'EnaGen', '1' )
     HyWorksApi.setComponentParameter( 'CP3', 'EnaGen', '0' )
@@ -221,6 +221,14 @@ for caso in range(len(Parampruebalin['caso'])):
     HyWorksApi.setComponentParameter(Parampruebalin['elemento'][caso],'T2Pb',str(Parampruebalin['T2Pb'][caso]))
     HyWorksApi.setComponentParameter(Parampruebalin['elemento'][caso],'T2Pc',str(Parampruebalin['T2Pc'][caso]))
     HyWorksApi.setComponentParameter(Parampruebalin['elemento'][caso],'T2Pg',str(Parampruebalin['T2Pg'][caso]))
+    HyWorksApi.setComponentParameter(Parampruebalin['elemento'][caso],'T3Pa',str(Parampruebalin['T3Pa'][caso]))
+    HyWorksApi.setComponentParameter(Parampruebalin['elemento'][caso],'T3Pb',str(Parampruebalin['T3Pb'][caso]))
+    HyWorksApi.setComponentParameter(Parampruebalin['elemento'][caso],'T3Pc',str(Parampruebalin['T3Pc'][caso]))
+    HyWorksApi.setComponentParameter(Parampruebalin['elemento'][caso],'T3Pg',str(Parampruebalin['T3Pg'][caso]))
+    HyWorksApi.setComponentParameter(Parampruebalin['elemento'][caso],'T4Pa',str(Parampruebalin['T4Pa'][caso]))
+    HyWorksApi.setComponentParameter(Parampruebalin['elemento'][caso],'T4Pb',str(Parampruebalin['T4Pb'][caso]))
+    HyWorksApi.setComponentParameter(Parampruebalin['elemento'][caso],'T4Pc',str(Parampruebalin['T4Pc'][caso]))
+    HyWorksApi.setComponentParameter(Parampruebalin['elemento'][caso],'T4Pg',str(Parampruebalin['T4Pg'][caso]))
     
     if Parampruebalin['caso'][caso] == 11 or Parampruebalin['caso'][caso] == 12: 
     
@@ -258,7 +266,7 @@ for caso in range(len(Parampruebalin['caso'])):
 
     ScopeViewApi.setTrig(True)
     Parampruebalin['t_inyect'].append(str(datetime.now()))
-    Test_Time[ 'Caso_' + str( int( Parampruebalin['caso'][caso] )).zfill(2) ]= datetime.now()
+    Test_Time[ 'Caso ' + str( int( Parampruebalin['caso'][caso] )) ]= datetime.now()
     ScopeViewApi.startAcquisition()
     print('Tiempo de inyeccion = '+ Parampruebalin['t_inyect'][-1])
 
@@ -317,7 +325,7 @@ for casobar in range(len(Parampruebabar['caso'])):
     # HyWorksApi.startSim()
     ScopeViewApi.setTrig(True)
     Parampruebabar['t_inyect'].append( str(datetime.now() ))
-    Test_Time[ 'Caso_' + str( int( Parampruebabar['caso'][casobar] )).zfill(2) ]=  datetime.now()
+    Test_Time[ 'Caso ' + str( int( Parampruebabar['caso'][casobar] )) ]=  datetime.now()
     ScopeViewApi.startAcquisition()
     
     # HyWorksApi.stopSim()                                                                                  # Esto se pone si se va a simular en el Target1
@@ -377,7 +385,7 @@ for file in allF2:
     
     D1, T1= Digital( ComtradeObjec2.getDigitalASCCI(1), Time )                              # Trip A
     D2, T2= Digital( ComtradeObjec2.getDigitalASCCI(2), Time )                              # Trip B
-    D3, T3= Digital( ComtradeObjec2.getDigitalASCCI(3), Time )                              # Trip CD3
+    D3, T3= Digital( ComtradeObjec2.getDigitalASCCI(3), Time )                              # Trip C
     D4, T4= Digital( ComtradeObjec2.getDigitalASCCI(4), Time )                              # 21 Dir Forward
     D5, T5= Digital( ComtradeObjec2.getDigitalASCCI(5), Time )                              # 21 Dir Backward
     D6, T6= Digital( ComtradeObjec2.getDigitalASCCI(6), Time )                              # Trip Z4 reversal
@@ -436,7 +444,7 @@ for ii,k in enumerate( DD ):                                                    
     
     var2= list( Data2[ list( Data2.columns[:17] ) ].loc[ Data2['Target']== Estimated2[ii] ].values[0])
     
-    if DD[k]['DO'] != var2:        
+    if DD[k]['DO'] != var2 and k == Data2['Caso'][ii]:        
         Ress2[ii]= [ Ress2[ii][0] ] + [ 'No Asociado' ] + [ ' - ' for i in range( len( Re2[ii] ) - 2 ) ]
 
    

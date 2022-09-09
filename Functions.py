@@ -235,52 +235,52 @@ def DefCaso_NN( M ) -> dict:
                                                         
     for k,caso in enumerate( M.keys() ):                        # Saca los 'file'       
         
-            if caso == 'Caso_01':
+            if caso == 'Caso 1':
                 A1, A2, A3, A4 = 0, 0, 0, 0
                                 
-            elif caso == 'Caso_02':
+            elif caso == 'Caso 2':
                 A1, A2, A3, A4 = 0, 0, 0, 1
                 
-            elif caso == 'Caso_03':
+            elif caso == 'Caso 3':
                 A1, A2, A3, A4 = 0, 0, 1, 0
                                     
-            elif caso == 'Caso_04':
+            elif caso == 'Caso 4':
                 A1, A2, A3, A4 = 0, 0, 1, 1 
                 
-            elif caso == 'Caso_05':
+            elif caso == 'Caso 5':
                 A1, A2, A3, A4 = 0, 1, 0, 0
                                      
-            elif caso == 'Caso_06':
+            elif caso == 'Caso 6':
                 A1, A2, A3, A4 = 0, 1, 0, 1
                                     
-            elif caso == 'Caso_07':
+            elif caso == 'Caso 7':
                 A1, A2, A3, A4 = 0, 1, 1, 0
                                     
-            elif caso == 'Caso_08':
+            elif caso == 'Caso 8':
                 A1, A2, A3, A4 = 0, 1, 1, 1
                                     
-            elif caso == 'Caso_09':
+            elif caso == 'Caso 9':
                 A1, A2, A3, A4 = 1, 0, 0, 0
                                     
-            elif caso == 'Caso_10':
+            elif caso == 'Caso 10':
                 A1, A2, A3, A4 = 1, 0, 0, 1
                                     
-            elif caso == 'Caso_11':
+            elif caso == 'Caso 11':
                 A1, A2, A3, A4 = 1, 0, 1, 0
                                    
-            elif caso == 'Caso_12':
+            elif caso == 'Caso 12':
                 A1, A2, A3, A4 = 1, 0, 1, 1
                                    
-            elif caso == 'Caso_13':
+            elif caso == 'Caso 13':
                 A1, A2, A3, A4 = 1, 1, 0, 0
                                     
-            elif caso == 'Caso_14':
+            elif caso == 'Caso 14':
                 A1, A2, A3, A4 = 1, 1, 0, 1
                                     
-            elif caso == 'Caso_15':
+            elif caso == 'Caso 15':
                 A1, A2, A3, A4 = 1, 1, 1, 0
                 
-            elif caso == 'Caso_16':
+            elif caso == 'Caso 16':
                 A1, A2, A3, A4 = 1, 1, 1, 1 
                             
             M[ caso ]['DO']= M[ caso ]['DO'] + [A1, A2, A3, A4]
