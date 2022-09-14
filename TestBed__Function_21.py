@@ -138,10 +138,10 @@ HyWorksApi.startAndConnectHypersim()
 #HyWorksApi.connectToHyWorks(host='localhost',timeout=180000)
 
 
-HyWorksApi.openDesign(designPath)
-HyWorksApi.clearCodeDir()
-HyWorksApi.loadSensors (hy_sensors)
-HyWorksApi.analyze()
+HyWorksApi.openDesign(designPath)                                                                   # Abre el caso de estudio de Hypersim
+HyWorksApi.clearCodeDir()                                                                           # Limpia el directorio
+HyWorksApi.loadSensors (hy_sensors)                                                                 # Carga el archivo de sensores definido para la prueba
+HyWorksApi.analyze()                                                                                # Cosas de Opal necesarias
 HyWorksApi.mapTask()
 HyWorksApi.genCode()
 
@@ -152,12 +152,12 @@ time.sleep(1)
 HyWorksApi.setComponentParameter( 'ClearLEDs', 'K', '0')
 """
 
-HyWorksApi.setComponentParameter( 'CB_Aux_Ant', 'CmdBlockSelect', 'Internal')                      # Se apagan estos interruptores y se dejan conectados siempre para q no cambien su estado durante los casos
+HyWorksApi.setComponentParameter( 'CB_Aux_Ant', 'CmdBlockSelect', 'Internal')                      # Se apagan las maniobras de los interruptores "CB_Aux_Ant" y CB_Aux_Cerro", y se dejan conectados siempre para q no cambien su estado durante los casos
 HyWorksApi.setComponentParameter( 'CB_Aux_Ant', 'EnaGen', '0')
 HyWorksApi.setComponentParameter( 'CB_Aux_Cerro', 'CmdBlockSelect', 'Internal')
 HyWorksApi.setComponentParameter( 'CB_Aux_Cerro', 'EnaGen', '0')
 
-HyWorksApi.setComponentParameter( 'CB_Aux_Ant', 'EtatIniA', '1')                       
+HyWorksApi.setComponentParameter( 'CB_Aux_Ant', 'EtatIniA', '1')                                    # Se configuran para q siempre queden abiertos
 HyWorksApi.setComponentParameter( 'CB_Aux_Ant', 'EtatIniB', '1') 
 HyWorksApi.setComponentParameter( 'CB_Aux_Ant', 'EtatIniC', '1') 
 
@@ -169,17 +169,17 @@ HyWorksApi.setComponentParameter( 'CP1', 'EnaGen', '1')
 HyWorksApi.setComponentParameter( 'CP3', 'EnaGen', '0')
 
 
-HyWorksApi.startSim()
+HyWorksApi.startSim()                                                                               # Start th simulation (Botón Start de hypersim)
 print('Simulacion en ejecucion... Caso base')
-HyWorksApi.takeSnapshot()
+HyWorksApi.takeSnapshot()                                                                           # "Captura" del estado actual de todos los elementos de lar red para tenerlo como referencia o "Checkpoint"
 print('Snapshot de Caso base tomado')
 time.sleep(5)
 
-ScopeViewApi.openScopeView()
-ScopeViewApi.loadTemplate(sv_template)
-ScopeViewApi.setSync(True)
-ScopeViewApi.setTrig(False)
-ScopeViewApi.startAcquisition()
+ScopeViewApi.openScopeView()                                                                        # Abre ScopeView
+ScopeViewApi.loadTemplate(sv_template)                                                              # Carga la plantilla de señales predefinida
+ScopeViewApi.setSync(True)                                                                          # Parámetro de scopeview
+ScopeViewApi.setTrig(False)                                                                         # Desactiva el "Trigger" para que al momento de simular, no ejecute alguén evento configurado
+ScopeViewApi.startAcquisition()                                                                     # Inicia captura de señales en scopeview
 print('Adquisicion... Caso base')
 
 time.sleep(3)
@@ -264,9 +264,8 @@ for caso in range(len(Parampruebalin['caso'])):
  
         
 
-    ScopeViewApi.setTrig(True)
-    Parampruebalin['t_inyect'].append(str(datetime.now()))
-    Test_Time[ 'Caso ' + str( int( Parampruebalin['caso'][caso] )) ]= datetime.now()
+    ScopeViewApi.setTrig(True)                                                                              # Habilita el "Trigger" para captura de señales
+    Test_Time[ 'Caso ' + str( int( Parampruebalin['caso'][caso] )) ]= datetime.now()                        # Guarda y asocia la fecha y hora del evento con el caso inyectado
     ScopeViewApi.startAcquisition()
     print('Tiempo de inyeccion = '+ Parampruebalin['t_inyect'][-1])
 

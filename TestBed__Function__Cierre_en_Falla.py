@@ -170,6 +170,7 @@ def ProcedEntreCasos():
     HyWorksApi.stopSim() 
     HyWorksApi.clearCodeDir()
     time.sleep(5)
+    print('Start Sim')
     HyWorksApi.startSim()
     time.sleep(5)    
     
@@ -180,6 +181,7 @@ def ProcedEntreCasos():
     print( 'Tiempo de inyeccion = ' + str( Test_Time[-1] ) )    
     
     #HyWorksApi.loadSnapshot()
+    time.sleep(10)
     CloseCBs()
     ScopeViewApi.setTrig(False)
     ScopeViewApi.startAcquisition()
@@ -240,6 +242,94 @@ time.sleep(3)
 
 
 Test_Time= []
+
+
+
+
+
+
+
+"""
+
+# Caso 3A: Estado inicial: Línea abierta sin falla "pegada". Se simula una prefalla y luego de 1 segundo, se cierra el interruptor BUS. 
+#  A los 200 ms se mete la falla para ver si dipara. Se espera durante 1 segundo de posfalla y finaliza el caso. Esta joda se repite pero con el TIE
+
+
+print('Caso 3A: CB BUS, Falla B-G, 1 Ohm, 5%')
+
+
+#"""
+Conf_CB_Aux( 'CB_Aux_Ant', 1, 1, 0, 0, 3.5, 0)
+Conf_CB_Aux( 'CB_Aux_Cerro', 1, 0, 0, 0, 0, 0)
+Line_Fault_Param( 7, 1, 1, 1, 0, 0, 3.7, 4.7, 0, 0, 1)
+#"""
+
+
+ProcedEntreCasos()
+
+
+print('Siguiente caso...' + '\n' )
+
+
+
+
+
+print('Caso 3B: CB TIE, Falla B-G, 1 Ohm, 91%')
+
+
+#"""
+Conf_CB_Aux( 'CB_Aux_Cerro', 1, 1, 0, 0, 3.5, 0)
+Conf_CB_Aux( 'CB_Aux_Ant', 1, 0, 0, 0, 0, 0)
+Line_Fault_Param( 102, 1, 1, 1, 0, 0, 3.7, 4.7, 0, 0, 1)
+#"""
+
+
+ProcedEntreCasos()
+
+
+print('Siguiente caso...' + '\n' )
+
+
+
+
+
+print('Caso 3C: CB BUS, Falla ABC-G, 1 Ohm, 5%')
+
+
+#"""
+Conf_CB_Aux( 'CB_Aux_Ant', 1, 1, 0, 0, 3.5, 0)
+Conf_CB_Aux( 'CB_Aux_Cerro', 1, 0, 0, 0, 0, 0)
+Line_Fault_Param( 7, 1, 1, 1, 0, 0, 3.7, 4.7, 0, 0, 2)
+#"""
+
+
+ProcedEntreCasos()
+
+
+print('Siguiente caso...' + '\n' )
+
+
+
+
+
+
+"""
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -332,6 +422,8 @@ time.sleep(5)
 """
 
 
+
+
 # Caso 1B__TIE: Línea abierta con falla Monofásica "pegada" al 90 % de la línea. Se simula una prefalla y luego de 1 segundo, se cierra el interruptor TIE 
 #  para ver si la falla continúa. Se espera durante 1 segundo de posfalla y finaliza el caso.
 
@@ -340,71 +432,9 @@ print('Caso 1B: CB TIE, Falla B-G, 1 Ohm, 90%' )
 #"""
 Conf_CB_Aux( 'CB_Aux_Cerro', 1, 1, 0, 0, 3.5, 0)
 Conf_CB_Aux( 'CB_Aux_Ant', 1, 0, 0, 0, 0, 0)
-Line_Fault_Param( 95, 1, 1, 1, 0, 0, 0.5, 4.5, 0, 0, 1)
+Line_Fault_Param( 102, 1, 1, 1, 0, 0, 0.5, 4.5, 0, 0, 1)
 #"""
 
-"""
-HyWorksApi.setComponentParameter( 'CP1','fault_loc', '56' )
-HyWorksApi.setComponentParameter( 'CP1','RDef', '1' )
-HyWorksApi.setComponentParameter( 'CP1','EnaT1', '1' )
-HyWorksApi.setComponentParameter( 'CP1','EnaT2', '1' )
-HyWorksApi.setComponentParameter( 'CP1','T1', '0.5' )
-HyWorksApi.setComponentParameter( 'CP1','T2', '1.5' )
-HyWorksApi.setComponentParameter( 'CP1','T1Pa', '0' )
-HyWorksApi.setComponentParameter( 'CP1','T1Pb', '1' )
-HyWorksApi.setComponentParameter( 'CP1','T1Pc', '0' )
-HyWorksApi.setComponentParameter( 'CP1','T1Pg', '1' )
-HyWorksApi.setComponentParameter( 'CP1','T2Pa', '0' )
-HyWorksApi.setComponentParameter( 'CP1','T2Pb', '1' )
-HyWorksApi.setComponentParameter( 'CP1','T2Pc', '0' )
-HyWorksApi.setComponentParameter( 'CP1','T2Pg', '1' )
-
-
-HyWorksApi.setComponentParameter( 'CB_Aux_Cerro','EnaT1', '1' )
-HyWorksApi.setComponentParameter( 'CB_Aux_Cerro','EnaT2', '1' )
-HyWorksApi.setComponentParameter( 'CB_Aux_Cerro','T1', '0' )
-HyWorksApi.setComponentParameter( 'CB_Aux_Cerro','T2', '3.5' )
-HyWorksApi.setComponentParameter( 'CB_Aux_Cerro','T3', '5' )
-
-HyWorksApi.setComponentParameter( 'CB_Aux_Cerro','T1Pa', '1' )                                   # Abre
-HyWorksApi.setComponentParameter( 'CB_Aux_Cerro','T1Pb', '1' )
-HyWorksApi.setComponentParameter( 'CB_Aux_Cerro','T1Pc', '1' )
-
-HyWorksApi.setComponentParameter( 'CB_Aux_Cerro','T2Pa', '1' )                                   # Cierra
-HyWorksApi.setComponentParameter( 'CB_Aux_Cerro','T2Pb', '1' )
-HyWorksApi.setComponentParameter( 'CB_Aux_Cerro','T2Pc', '1' )
-
-HyWorksApi.setComponentParameter( 'CB_Aux_Ant','EnaT1', '1' )
-HyWorksApi.setComponentParameter( 'CB_Aux_Ant','T1', '0' )
-HyWorksApi.setComponentParameter( 'CB_Aux_Ant','T1Pa', '1' )                                     # Abre
-HyWorksApi.setComponentParameter( 'CB_Aux_Ant','T1Pb', '1' )
-HyWorksApi.setComponentParameter( 'CB_Aux_Ant','T1Pc', '1' )
-"""
-
-
-"""
-print('Stop Sim')
-HyWorksApi.stopSim() 
-HyWorksApi.clearCodeDir()
-time.sleep(5)
-HyWorksApi.startSim()
-time.sleep(5)
-
-
-ScopeViewApi.setTrig(True)
-Test_Time.append( datetime.now() )
-
-ScopeViewApi.startAcquisition()
-print( 'Tiempo de inyeccion = ' + str( Test_Time[-1] ) )
-
-
-#HyWorksApi.loadSnapshot()
-CloseCBs()
-ScopeViewApi.setTrig(False)
-ScopeViewApi.startAcquisition()
-time.sleep(25)
-
-"""
 
 ProcedEntreCasos()
 
@@ -426,75 +456,11 @@ Conf_CB_Aux( 'CB_Aux_Cerro', 1, 0, 0, 0, 0, 0)
 Line_Fault_Param( 102, 1, 1, 1, 0, 0, 0.5, 4.5, 0, 0, 2)
 #"""
 
-"""
-HyWorksApi.setComponentParameter( 'CP1','fault_loc', '102' )
-HyWorksApi.setComponentParameter( 'CP1','RDef', '1' )
-HyWorksApi.setComponentParameter( 'CP1','EnaT1', '1' )
-HyWorksApi.setComponentParameter( 'CP1','EnaT2', '1' )
-HyWorksApi.setComponentParameter( 'CP1','T1', '0.5' )
-HyWorksApi.setComponentParameter( 'CP1','T2', '1.5' )
-HyWorksApi.setComponentParameter( 'CP1','T1Pa', '1' )
-HyWorksApi.setComponentParameter( 'CP1','T1Pb', '0' )
-HyWorksApi.setComponentParameter( 'CP1','T1Pc', '1' )
-HyWorksApi.setComponentParameter( 'CP1','T1Pg', '1' )
-HyWorksApi.setComponentParameter( 'CP1','T2Pa', '1' )
-HyWorksApi.setComponentParameter( 'CP1','T2Pb', '0' )
-HyWorksApi.setComponentParameter( 'CP1','T2Pc', '1' )
-HyWorksApi.setComponentParameter( 'CP1','T2Pg', '1' )
-
-
-HyWorksApi.setComponentParameter( 'CB_Aux_Ant','EnaT1', '1' )
-HyWorksApi.setComponentParameter( 'CB_Aux_Ant','EnaT2', '1' )
-HyWorksApi.setComponentParameter( 'CB_Aux_Ant','T1', '0' )
-HyWorksApi.setComponentParameter( 'CB_Aux_Ant','T2', '3.5' )
-HyWorksApi.setComponentParameter( 'CB_Aux_Ant','T3', '5' )
-
-HyWorksApi.setComponentParameter( 'CB_Aux_Ant','T1Pa', '1' )                                   # Abre
-HyWorksApi.setComponentParameter( 'CB_Aux_Ant','T1Pb', '1' )
-HyWorksApi.setComponentParameter( 'CB_Aux_Ant','T1Pc', '1' )
-
-HyWorksApi.setComponentParameter( 'CB_Aux_Ant','T2Pa', '1' )                                   # Cierra
-HyWorksApi.setComponentParameter( 'CB_Aux_Ant','T2Pb', '1' )
-HyWorksApi.setComponentParameter( 'CB_Aux_Ant','T2Pc', '1' )
-
-HyWorksApi.setComponentParameter( 'CB_Aux_Cerro','EnaT1', '1' )
-HyWorksApi.setComponentParameter( 'CB_Aux_Cerro','T1', '0' )
-HyWorksApi.setComponentParameter( 'CB_Aux_Cerro','T1Pa', '1' )                                 # Abre
-HyWorksApi.setComponentParameter( 'CB_Aux_Cerro','T1Pb', '1' )
-HyWorksApi.setComponentParameter( 'CB_Aux_Cerro','T1Pc', '1' )
-
-"""
-
-
-"""
-print('Stop Sim')
-HyWorksApi.stopSim() 
-HyWorksApi.clearCodeDir()
-time.sleep(5)
-HyWorksApi.startSim()
-time.sleep(5)
-
-
-ScopeViewApi.setTrig(True)
-Test_Time.append( datetime.now() )
-
-ScopeViewApi.startAcquisition()
-print( 'Tiempo de inyeccion = ' + str( Test_Time[-1] ) )
-
-
-#HyWorksApi.loadSnapshot()
-CloseCBs()
-ScopeViewApi.setTrig(False)
-ScopeViewApi.startAcquisition()
-time.sleep(25)
-
-"""
 
 ProcedEntreCasos()
 
 
 print('Siguiente caso...' + '\n' )
-
 
 
 
@@ -511,75 +477,11 @@ Conf_CB_Aux( 'CB_Aux_Ant', 1, 0, 0, 0, 0, 0)
 Line_Fault_Param( 56, 1, 1, 1, 0, 0, 0.5, 4.5, 0, 0, 1)
 #"""
 
-"""
-HyWorksApi.setComponentParameter( 'CP1','fault_loc', '56' )
-HyWorksApi.setComponentParameter( 'CP1','RDef', '5' )
-HyWorksApi.setComponentParameter( 'CP1','EnaT1', '1' )
-HyWorksApi.setComponentParameter( 'CP1','EnaT2', '1' )
-HyWorksApi.setComponentParameter( 'CP1','T1', '0.5' )
-HyWorksApi.setComponentParameter( 'CP1','T2', '1.5' )
-HyWorksApi.setComponentParameter( 'CP1','T1Pa', '0' )
-HyWorksApi.setComponentParameter( 'CP1','T1Pb', '1' )
-HyWorksApi.setComponentParameter( 'CP1','T1Pc', '0' )
-HyWorksApi.setComponentParameter( 'CP1','T1Pg', '1' )
-HyWorksApi.setComponentParameter( 'CP1','T2Pa', '0' )
-HyWorksApi.setComponentParameter( 'CP1','T2Pb', '1' )
-HyWorksApi.setComponentParameter( 'CP1','T2Pc', '0' )
-HyWorksApi.setComponentParameter( 'CP1','T2Pg', '1' )
-
-
-HyWorksApi.setComponentParameter( 'CB_Aux_Cerro','EnaT1', '1' )
-HyWorksApi.setComponentParameter( 'CB_Aux_Cerro','EnaT2', '1' )
-HyWorksApi.setComponentParameter( 'CB_Aux_Cerro','T1', '0' )
-HyWorksApi.setComponentParameter( 'CB_Aux_Cerro','T2', '3.5' )
-HyWorksApi.setComponentParameter( 'CB_Aux_Cerro','T3', '5' )
-
-HyWorksApi.setComponentParameter( 'CB_Aux_Cerro','T1Pa', '1' )                                   # Abre
-HyWorksApi.setComponentParameter( 'CB_Aux_Cerro','T1Pb', '1' )
-HyWorksApi.setComponentParameter( 'CB_Aux_Cerro','T1Pc', '1' )
-
-HyWorksApi.setComponentParameter( 'CB_Aux_Cerro','T2Pa', '1' )                                   # Cierra
-HyWorksApi.setComponentParameter( 'CB_Aux_Cerro','T2Pb', '1' )
-HyWorksApi.setComponentParameter( 'CB_Aux_Cerro','T2Pc', '1' )
-
-HyWorksApi.setComponentParameter( 'CB_Aux_Ant','EnaT1', '1' )
-HyWorksApi.setComponentParameter( 'CB_Aux_Ant','T1', '0' )
-HyWorksApi.setComponentParameter( 'CB_Aux_Ant','T1Pa', '1' )                                 # Abre
-HyWorksApi.setComponentParameter( 'CB_Aux_Ant','T1Pb', '1' )
-HyWorksApi.setComponentParameter( 'CB_Aux_Ant','T1Pc', '1' )
-
-"""
-
-
-"""
-print('Stop Sim')
-HyWorksApi.stopSim() 
-HyWorksApi.clearCodeDir()
-time.sleep(5)
-HyWorksApi.startSim()
-time.sleep(5)
-
-
-ScopeViewApi.setTrig(True)
-Test_Time.append( datetime.now() )
-
-ScopeViewApi.startAcquisition()
-print( 'Tiempo de inyeccion = ' + str( Test_Time[-1] ) )
-
-
-#HyWorksApi.loadSnapshot()
-CloseCBs()
-ScopeViewApi.setTrig(False)
-ScopeViewApi.startAcquisition()
-time.sleep(25)
-
-"""
 
 ProcedEntreCasos()
 
 
 print('Siguiente caso...' + '\n' )
-
 
 
 
@@ -597,70 +499,6 @@ Conf_CB_Aux( 'CB_Aux_Cerro', 1, 0, 0, 0, 0, 0)
 Line_Fault_Param( 7, 1, 1, 1, 0, 0, 0.5, 4.5, 0, 0, 3)
 #"""
 
-
-"""
-HyWorksApi.setComponentParameter( 'CP1','fault_loc', '7' )
-HyWorksApi.setComponentParameter( 'CP1','RDef', '1' )
-HyWorksApi.setComponentParameter( 'CP1','EnaT1', '1' )
-HyWorksApi.setComponentParameter( 'CP1','EnaT2', '1' )
-HyWorksApi.setComponentParameter( 'CP1','T1', '0.5' )
-HyWorksApi.setComponentParameter( 'CP1','T2', '1.5' )
-HyWorksApi.setComponentParameter( 'CP1','T1Pa', '1' )
-HyWorksApi.setComponentParameter( 'CP1','T1Pb', '1' )
-HyWorksApi.setComponentParameter( 'CP1','T1Pc', '1' )
-HyWorksApi.setComponentParameter( 'CP1','T1Pg', '1' )
-HyWorksApi.setComponentParameter( 'CP1','T2Pa', '1' )
-HyWorksApi.setComponentParameter( 'CP1','T2Pb', '1' )
-HyWorksApi.setComponentParameter( 'CP1','T2Pc', '1' )
-HyWorksApi.setComponentParameter( 'CP1','T2Pg', '1' )
-
-
-HyWorksApi.setComponentParameter( 'CB_Aux_Ant','EnaT1', '1' )
-HyWorksApi.setComponentParameter( 'CB_Aux_Ant','EnaT2', '1' )
-HyWorksApi.setComponentParameter( 'CB_Aux_Ant','T1', '0' )
-HyWorksApi.setComponentParameter( 'CB_Aux_Ant','T2', '3.5' )
-HyWorksApi.setComponentParameter( 'CB_Aux_Ant','T3', '5' )
-
-HyWorksApi.setComponentParameter( 'CB_Aux_Ant','T1Pa', '1' )                                   # Abre
-HyWorksApi.setComponentParameter( 'CB_Aux_Ant','T1Pb', '1' )
-HyWorksApi.setComponentParameter( 'CB_Aux_Ant','T1Pc', '1' )
-
-HyWorksApi.setComponentParameter( 'CB_Aux_Ant','T2Pa', '1' )                                   # Cierra
-HyWorksApi.setComponentParameter( 'CB_Aux_Ant','T2Pb', '1' )
-HyWorksApi.setComponentParameter( 'CB_Aux_Ant','T2Pc', '1' )
-
-HyWorksApi.setComponentParameter( 'CB_Aux_Cerro','EnaT1', '1' )
-HyWorksApi.setComponentParameter( 'CB_Aux_Cerro','T1', '0' )
-HyWorksApi.setComponentParameter( 'CB_Aux_Cerro','T1Pa', '1' )                                 # Abre
-HyWorksApi.setComponentParameter( 'CB_Aux_Cerro','T1Pb', '1' )
-HyWorksApi.setComponentParameter( 'CB_Aux_Cerro','T1Pc', '1' )
-
-"""
-
-
-"""
-print('Stop Sim')
-HyWorksApi.stopSim() 
-HyWorksApi.clearCodeDir()
-time.sleep(5)
-HyWorksApi.startSim()
-time.sleep(5)
-
-
-ScopeViewApi.setTrig(True)
-Test_Time.append( datetime.now() )
-
-ScopeViewApi.startAcquisition()
-print( 'Tiempo de inyeccion = ' + str( Test_Time[-1] ) )
-
-
-#HyWorksApi.loadSnapshot()
-CloseCBs()
-ScopeViewApi.setTrig(False)
-ScopeViewApi.startAcquisition()
-time.sleep(25)
-
-"""
 
 ProcedEntreCasos()
 
@@ -707,35 +545,10 @@ Line_Fault_Param( 7, 1, 1, 1, 0, 0, 1, 2, 0, 0, 1)
 #"""
 
 
-"""
-print('Stop Sim')
-HyWorksApi.stopSim() 
-HyWorksApi.clearCodeDir()
-time.sleep(5)
-HyWorksApi.startSim()
-time.sleep(5)
-
-
-ScopeViewApi.setTrig(True)
-Test_Time.append( datetime.now() )
-
-ScopeViewApi.startAcquisition()
-print( 'Tiempo de inyeccion = ' + str( Test_Time[-1] ) )
-
-
-#HyWorksApi.loadSnapshot()
-CloseCBs()
-ScopeViewApi.setTrig(False)
-ScopeViewApi.startAcquisition()
-time.sleep(25)
-
-"""
-
 ProcedEntreCasos()
 
 
 print('Siguiente caso...' + '\n' )
-
 
 
 
@@ -751,35 +564,10 @@ Line_Fault_Param( 95, 1, 1, 1, 0, 0, 1, 2, 0, 0, 1)
 #"""
 
 
-"""
-print('Stop Sim')
-HyWorksApi.stopSim() 
-HyWorksApi.clearCodeDir()
-time.sleep(5)
-HyWorksApi.startSim()
-time.sleep(5)
-
-
-ScopeViewApi.setTrig(True)
-Test_Time.append( datetime.now() )
-
-ScopeViewApi.startAcquisition()
-print( 'Tiempo de inyeccion = ' + str( Test_Time[-1] ) )
-
-
-#HyWorksApi.loadSnapshot()
-CloseCBs()
-ScopeViewApi.setTrig(False)
-ScopeViewApi.startAcquisition()
-time.sleep(25)
-
-"""
-
 ProcedEntreCasos()
 
 
 print('Siguiente caso...' + '\n' )
-
 
 
 
@@ -794,30 +582,6 @@ Conf_CB_Aux( 'CB_Aux_Cerro', 1, 1, 0, 1.050, 1.750, 0)
 Line_Fault_Param( 7, 1, 1, 1, 0, 0, 1, 2, 0, 0, 2)
 #"""
 
-
-"""
-print('Stop Sim')
-HyWorksApi.stopSim() 
-HyWorksApi.clearCodeDir()
-time.sleep(5)
-HyWorksApi.startSim()
-time.sleep(5)
-
-
-ScopeViewApi.setTrig(True)
-Test_Time.append( datetime.now() )
-
-ScopeViewApi.startAcquisition()
-print( 'Tiempo de inyeccion = ' + str( Test_Time[-1] ) )
-
-
-#HyWorksApi.loadSnapshot()
-CloseCBs()
-ScopeViewApi.setTrig(False)
-ScopeViewApi.startAcquisition()
-time.sleep(25)
-
-"""
 
 ProcedEntreCasos()
 
@@ -845,30 +609,6 @@ Line_Fault_Param( 7, 1, 1, 1, 1, 1, 1, 1.150, 2.118, 2.268, 1)                  
 #"""
 
 
-"""
-print('Stop Sim')
-HyWorksApi.stopSim() 
-HyWorksApi.clearCodeDir()
-time.sleep(5)
-HyWorksApi.startSim()
-time.sleep(5)
-
-
-ScopeViewApi.setTrig(True)
-Test_Time.append( datetime.now() )
-
-ScopeViewApi.startAcquisition()
-print( 'Tiempo de inyeccion = ' + str( Test_Time[-1] ) )
-
-
-#HyWorksApi.loadSnapshot()
-CloseCBs()
-ScopeViewApi.setTrig(False)
-ScopeViewApi.startAcquisition()
-time.sleep(25)
-
-"""
-
 ProcedEntreCasos()
 
 
@@ -888,36 +628,10 @@ Line_Fault_Param( 95, 1, 1, 1, 1, 1, 1, 1.150, 2.118, 2.268, 1)                 
 #"""
 
 
-"""
-print('Stop Sim')
-HyWorksApi.stopSim() 
-HyWorksApi.clearCodeDir()
-time.sleep(5)
-HyWorksApi.startSim()
-time.sleep(5)
-
-
-ScopeViewApi.setTrig(True)
-Test_Time.append( datetime.now() )
-
-ScopeViewApi.startAcquisition()
-print( 'Tiempo de inyeccion = ' + str( Test_Time[-1] ) )
-
-
-#HyWorksApi.loadSnapshot()
-CloseCBs()
-ScopeViewApi.setTrig(False)
-ScopeViewApi.startAcquisition()
-time.sleep(25)
-
-"""
-
 ProcedEntreCasos()
 
 
 print('Siguiente caso...' + '\n' )
-
-
 
 
 
@@ -933,30 +647,6 @@ Line_Fault_Param( 95, 1, 1, 1, 1, 1, 1, 1.150, 2.118, 2.268, 2)                 
 #"""
 
 
-"""
-print('Stop Sim')
-HyWorksApi.stopSim() 
-HyWorksApi.clearCodeDir()
-time.sleep(5)
-HyWorksApi.startSim()
-time.sleep(5)
-
-
-ScopeViewApi.setTrig(True)
-Test_Time.append( datetime.now() )
-
-ScopeViewApi.startAcquisition()
-print( 'Tiempo de inyeccion = ' + str( Test_Time[-1] ) )
-
-
-#HyWorksApi.loadSnapshot()
-CloseCBs()
-ScopeViewApi.setTrig(False)
-ScopeViewApi.startAcquisition()
-time.sleep(25)
-
-"""
-
 ProcedEntreCasos()
 
 
@@ -971,19 +661,23 @@ print('Siguiente caso...' + '\n' )
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 """
-
-
-
-
-
-
-# Caso 3A: Estado inicial: Línea abierta sin falla "pegada". Se simula una prefalla y luego de 1 segundo, se cierra el interruptor BUS. 
-#  A los 200 ms se mete la falla para ver si dipara. Se espera durante 1 segundo de posfalla y finaliza el caso. Esta joda se repite pero con el TIE
-
-
-print('Caso 3A: BUS')
-
 
 # Configurar la falla en la línea: Falla trifásica de 1 Ohm al 50% de la línea
 
