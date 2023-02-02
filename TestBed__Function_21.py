@@ -18,7 +18,7 @@ from Functions import *
 
 
 time.sleep(3)
-# Colocar acÃ¡ el path de los archivos necesarios para la prueba
+# Colocar acá el path de los archivos necesarios para la prueba
 
 """
 #designPath = r'D:\JoseM\Cama_de_Pruebas\BancoDePruebasV38_2___V2021__Target2\BancoDePruebasV38_2___V2021__Target2.ecf'
@@ -34,7 +34,7 @@ sv_template = r'D:\JoseM\Cama_de_Pruebas\Template_ScopeView__TestBed__Rel_Rem.sv
 
 
 # Carpeta y path para Comtrades
-Carpeta= 'Ensayo Rel_Remoto_6_NN'                                                                                   # En esta carpeta se van a descargar los archivos Comtrade que se generan en el relï¿½
+Carpeta= 'Ensayo Rel_Remoto_6_NN'                                                                                   # En esta carpeta se van a descargar los archivos Comtrade que se generan en el relé
 pathh = 'D:\JoseM\Cama_de_Pruebas\Pruebas Fallas CID\Ensayos Automatismo Python'                                    # Path de la carpeta anterior
 path2= pathh + "\\" + Carpeta
 
@@ -62,14 +62,14 @@ linrowend = sheet.range('A'+str(linrowini)).end('down').row
 barrowini = search_xlw('A','barras')+2
 barrowend = sheet.range('A'+str(barrowini)).end('down').row
 
-# CreaciÃ³n de diccionario para almacenar parametros de la prueba
+# Creación de diccionario para almacenar parametros de la prueba
 Parampruebalin= {'caso':[],'tipo':[],'disporcent':[],'voltref':[],'tiempofalla':[],'tiempoclear':[],'distancia':[],'rfalla':[],'elemento':[],
                  'fault_loc':[],'RDef':[],'EnaT1':[],'EnaT2':[],'EnaT3':[],'EnaT4':[],'T1':[],'T2':[],'T3':[],'T4':[],'T1Pa':[],'T1Pb':[],'T1Pc':[],'T1Pg':[],
                  'T2Pa':[],'T2Pb':[],'T2Pc':[],'T2Pg':[],'T3Pa':[],'T3Pb':[],'T3Pc':[],'T3Pg':[],'T4Pa':[],'T4Pb':[],'T4Pc':[],'T4Pg':[],'t_inyect':[]}
 Parampruebabar= {'caso':[],'tipo':[],'tiempofalla':[],'tiempoclear':[],'elemento':[],'rfalla':[],'EnaT1':[],'EnaT2':[],'T1':[],'T2':[],'T1Pa':[],
                  'T1Pb':[],'T1Pc':[],'T1Pg':[],'T2Pa':[],'T2Pb':[],'T2Pc':[],'T2Pg':[],'t_inyect':[]}
 
-# Loop para llenar diccionario de parametros de pruebas sobre lÃ­neas 
+# Loop para llenar diccionario de parametros de pruebas sobre líneas
 for row in range(linrowini,linrowend+1):
     Parampruebalin['caso'].append(sheet.range('A'+str(row)).value)
     Parampruebalin['tipo'].append(str(sheet.range('B'+str(row)).value))
@@ -130,12 +130,12 @@ for row in range(barrowini,barrowend+1):
 
 
 
-""" 
-Arrancar Hs (Hypersim), abrir el caso base, carga archivo de sensores, abre SV (Scope View),
-carga template de mediciones, analiza, map task, compila caso de HS, corre caso base y realiza una adquisiciÃ³n para el caso base
- """
-HyWorksApi.startAndConnectHypersim()
+# Arrancar Hs (Hypersim), abrir el caso base, carga archivo de sensores, abre SV (Scope View),
+#  carga template de mediciones, analiza, map task, compila caso de HS, corre caso base y realiza una adquisición para el caso base
 
+HyWorksApi.startAndConnectHypersim()
+#HyWorksApi.startHyperWorks(stdout=None, stderr=None)
+#HyWorksApi.connectToHyWorks(host='localhost',timeout=180000)
 
 
 HyWorksApi.openDesign(designPath)                                                                   # Abre el caso de estudio de Hypersim
@@ -169,17 +169,17 @@ HyWorksApi.setComponentParameter( 'CP1', 'EnaGen', '1')
 HyWorksApi.setComponentParameter( 'CP3', 'EnaGen', '0')
 
 
-HyWorksApi.startSim()                                                                               # Start th simulation (BotÃ³n Start de hypersim)
+HyWorksApi.startSim()                                                                               # Start th simulation (Botón Start de hypersim)
 print('Simulacion en ejecucion... Caso base')
 HyWorksApi.takeSnapshot()                                                                           # "Captura" del estado actual de todos los elementos de lar red para tenerlo como referencia o "Checkpoint"
 print('Snapshot de Caso base tomado')
 time.sleep(5)
 
 ScopeViewApi.openScopeView()                                                                        # Abre ScopeView
-ScopeViewApi.loadTemplate(sv_template)                                                              # Carga la plantilla de seÃ±ales predefinida
-ScopeViewApi.setSync(True)                                                                          # ParÃ¡metro de scopeview
-ScopeViewApi.setTrig(False)                                                                         # Desactiva el "Trigger" para que al momento de simular, no ejecute alguï¿½n evento configurado
-ScopeViewApi.startAcquisition()                                                                     # Inicia captura de seÃ±ales en scopeview
+ScopeViewApi.loadTemplate(sv_template)                                                              # Carga la plantilla de señales predefinida
+ScopeViewApi.setSync(True)                                                                          # Parámetro de scopeview
+ScopeViewApi.setTrig(False)                                                                         # Desactiva el "Trigger" para que al momento de simular, no ejecute alguén evento configurado
+ScopeViewApi.startAcquisition()                                                                     # Inicia captura de señales en scopeview
 print('Adquisicion... Caso base')
 
 time.sleep(3)
@@ -188,24 +188,20 @@ Test_Time= {}
 
 
 #ii= 0
-
-""" Loop para inyectar cada caso de prueba de lÃ­neas. Se leen los parÃ¡metros de cada caso y asignan 
-a las lÃ­neas, inyecta con SV y regresa al estado estacionario inicial """
-
+# Loop para inyectar cada caso de prueba de líneas. Se leen los parámetros de cada caso y asignan a las líneas, inyecta con SV y regresa al estado estacionario inicial
 for caso in range(len(Parampruebalin['caso'])):
 #for caso in range( 3 ):
     
     #ii += 1
     #caso= 5+ii
 
-    HyWorksApi.setComponentParameter( 'CP1', 'EnaGen', '1' )                                                    # Habilita los eventos definidos en la lÃ­nea "CP1" 
-    HyWorksApi.setComponentParameter( 'CP3', 'EnaGen', '0' )                                                    # Deshabilita los eventos definidos en la lÃ­nea "CP3"
+    HyWorksApi.setComponentParameter( 'CP1', 'EnaGen', '1' )
+    HyWorksApi.setComponentParameter( 'CP3', 'EnaGen', '0' )
 
     # Carga snapshot del caso base antes de inyectar el siguiente caso
     print('Ejecutando Caso %i' %( int(Parampruebalin['caso'][caso]) ) )
     para = 'Parametros--->'+'  Elemento-->'+str(Parampruebalin['elemento'][caso])+'  Tipo Falla-->'+str(Parampruebalin['tipo'][caso])+'  Distancia-->'+str(Parampruebalin['distancia'][caso])+'  T falla-->'+str(Parampruebalin['tiempofalla'][caso])+'  T Clear-->'+str(Parampruebalin['tiempoclear'][caso])+'  R falla-->'+str(Parampruebalin['rfalla'][caso])
     print(para)
-    
     # Cambiar parametros de acuerdo con el caso de falla HyWorksApi.setComponentParameter('componenete','parametro','valor')
     HyWorksApi.setComponentParameter(Parampruebalin['elemento'][caso],'fault_loc',str(Parampruebalin['fault_loc'][caso]))
     HyWorksApi.setComponentParameter(Parampruebalin['elemento'][caso],'RDef',str(Parampruebalin['RDef'][caso]))
@@ -250,6 +246,9 @@ for caso in range(len(Parampruebalin['caso'])):
         HyWorksApi.setComponentParameter('CB2','T1Pb',str(1))
         HyWorksApi.setComponentParameter('CB2','T1Pc',str(1))
     
+       #HyWorksApi.setComponentParameter('CB2','T2Pa',str(1))
+        #HyWorksApi.setComponentParameter('CB2','T2Pb',str(1))
+        #HyWorksApi.setComponentParameter('CB2','T2Pc',str(1))
     
         HyWorksApi.setComponentParameter('CB1', 'EnaT1', str( 1 ) )
         #HyWorksApi.setComponentParameter('CB1', 'EnaT2', str( 1 ) )
@@ -259,15 +258,19 @@ for caso in range(len(Parampruebalin['caso'])):
         HyWorksApi.setComponentParameter('CB1','T1Pb',str(1))
         HyWorksApi.setComponentParameter('CB1','T1Pc',str(1))
  
+        #HyWorksApi.setComponentParameter('CB1','T2Pa',str(1))
+        #HyWorksApi.setComponentParameter('CB1','T2Pb',str(1))
+        #HyWorksApi.setComponentParameter('CB1','T2Pc',str(1))
+ 
         
 
-    ScopeViewApi.setTrig(True)                                                                              # Habilita el "Trigger" para captura de seï¿½ales
+    ScopeViewApi.setTrig(True)                                                                              # Habilita el "Trigger" para captura de señales
     Test_Time[ 'Caso ' + str( int( Parampruebalin['caso'][caso] )) ]= datetime.now()                        # Guarda y asocia la fecha y hora del evento con el caso inyectado
-    ScopeViewApi.startAcquisition()                                                                         # Ejecuta los eventos definidos anteriormente
-    print('Tiempo de inyeccion = '+ Parampruebalin['t_inyect'][-1]) 
+    ScopeViewApi.startAcquisition()
+    print('Tiempo de inyeccion = '+ Parampruebalin['t_inyect'][-1])
 
-    HyWorksApi.loadSnapshot()                                                                               # Carga el snapshot tomado anteriormente para volver a las "condiciones iniciales" de simulaciï¿½n
-    ScopeViewApi.setTrig(False)                                                                             # Deshabilita el Trigger para ï¿½nicamente hacer una captura de seï¿½ales
+    HyWorksApi.loadSnapshot()
+    ScopeViewApi.setTrig(False)
     ScopeViewApi.startAcquisition()
     time.sleep(25)
     
@@ -277,13 +280,13 @@ for caso in range(len(Parampruebalin['caso'])):
     
     print('Siguiente caso...')
 
-print('Fin del set de pruebas en lï¿½neas')
+print('Fin del set de pruebas en líneas')
 
 
-HyWorksApi.setComponentParameter( 'CP1', 'EnaGen', '0' )                # Se apagan ambas lï¿½neas para q no entren en las fallas de las barras
+HyWorksApi.setComponentParameter( 'CP1', 'EnaGen', '0' )                # Se apagan ambas líneas para q no entren en las fallas de las barras
 HyWorksApi.setComponentParameter( 'CP3', 'EnaGen', '0' )
 
-# Loop para inyectar cada caso de prueba de barras. Se leen los parï¿½metros de cada caso y asignan a las barras, inyecta con SV y regresa al estado estacionario inicial
+# Loop para inyectar cada caso de prueba de barras. Se leen los parámetros de cada caso y asignan a las barras, inyecta con SV y regresa al estado estacionario inicial
 for casobar in range(len(Parampruebabar['caso'])):
     
     if Parampruebabar['caso'][casobar] == 4:     
@@ -314,13 +317,21 @@ for casobar in range(len(Parampruebabar['caso'])):
     HyWorksApi.setComponentParameter(Parampruebabar['elemento'][casobar], 'T2Pc', str(Parampruebabar['T2Pc'][casobar]))
     HyWorksApi.setComponentParameter(Parampruebabar['elemento'][casobar], 'T2Pg', str(Parampruebabar['T2Pg'][casobar]))
 
-
+    # HyWorksApi.stopSim()                                                                                  # Esto se pone si se va a simular en el Target1
+    # HyWorksApi.removeDevice('POW1')
+    # HyWorksApi.addDevice('Network Tools.clf', 'Point-on-wave', 11200, -9700, 1)
+    # HyWorksApi.connectDeviceToBus3ph('POW1', 'net_1', 'pownode')
+    # HyWorksApi.startSim()
     ScopeViewApi.setTrig(True)
     Parampruebabar['t_inyect'].append( str(datetime.now() ))
     Test_Time[ 'Caso ' + str( int( Parampruebabar['caso'][casobar] )) ]=  datetime.now()
     ScopeViewApi.startAcquisition()
     
-
+    # HyWorksApi.stopSim()                                                                                  # Esto se pone si se va a simular en el Target1
+    # HyWorksApi.startSim()
+    #   HyWorksApi.takeSnapshot()
+    #   print colored('Snapshot de Caso base tomado', 'yellow')
+    #   print colored('Cargando snapshot del caso base', 'yellow')
     HyWorksApi.loadSnapshot()
     ScopeViewApi.setTrig(False)
     ScopeViewApi.startAcquisition()
@@ -344,28 +355,30 @@ print( Test_Time )
 print('Fin Pruebas')
 
 
-#---- Inicia cÃ³digo para analizar los archivos comtrade y entrenar el Decision Tree -----#
 
-# Pausa para descargar los Comtrades la carpeta especificada y presionar 'Enter' para continuar la ejecuciÃ³n del cÃ³digo
-msg = "Download the Comtrade Files into the path: '{}' and Press Enter to continue')".format(path2)
-input(msg)
+
+
+# Inicia código para analizar los archivos comtrade y entrenar el Desicion Tree
+
+input('Donwload the Comtrade Files into the specific path and Press Enter to continue')                     # Tiempo para descargar los Comtrades la carpeta especificada y presionar 'Enter' para continuar la ejecución del código
 print('Next...')
+
+
 
 allF2 = []
 allnames2=[]
 
-# Busca en la carpeta "path2" todos los archivos con extensiÃ³n '.cfg' y crea una lista con los nombres y otra con el directorio completo
 for root, dirs, files in os.walk( path2, topdown= False):
    for name in files:
        if name.find('.cfg') > -1 or name.find('.CFG') > -1:
            allnames2.append(name)
-           allF2.append(os.path.join(root, name))          
+           allF2.append(os.path.join(root, name))           
            
 Comt_Time= {}
 DO2= []
 
 for file in allF2:
-    ComtradeObjec2= ReadAllComtrade(file)                                                   # Firts step, create instance for the comtrade class 
+    ComtradeObjec2= ReadAllComtrade(file)                                                   # Firts step, create instance for the comtrade class
     ComtradeObjec2.ReadDataFile()                                                           # Next, read the data file
     Time= ComtradeObjec2.getTimeChannel()/1000000                                           # Time in us
     
@@ -384,7 +397,7 @@ for file in allF2:
     D13, T13= Digital( ComtradeObjec2.getDigitalASCCI(13), Time )                           # Send O 85 - 21  POTT
    
     Digital_Out= [D1, D2, D3, D4, D5, D6, D7, D8, D9, D10, D11, D12, D13]                   # Construye el vector de 
-    #DO2.append( Digital_Out )
+    DO2.append( Digital_Out )
     
     Comt_Time[ file ]= { 'Comtrade Time': ComtradeObjec2.start,
                          'DO': Digital_Out }                                                # Crea un dict con los archivos como "keys" y los tiempos de captura de los comtrade como "values"
@@ -426,7 +439,7 @@ Re2= [ Data2[ cols_Re ].loc[ Data2['Target']== ii ].values[0] for ii in Estimate
                                           
 
 Ress2= Re2[:] 
-for ii,k in enumerate( DD ):                                                                # Se compara el vector de digitales que se captura de los comtrades con el vector de digitales que el DecisionTree asocia para el caso, con el fin de ver si el caso seleccionado sï¿½ es el correcto
+for ii,k in enumerate( DD ):                                                                # Se compara el vector de digitales que se captura de los comtrades con el vector de digitales que el DecisionTree asocia para el caso, con el fin de ver si el caso seleccionado sí es el correcto
     
     var2= list( Data2[ list( Data2.columns[:17] ) ].loc[ Data2['Target']== Estimated2[ii] ].values[0])
     
@@ -447,7 +460,7 @@ File_exp= path2 + '\\' + 'Resultados__' + Carpeta + '.xlsx'
 #export_excel = df2.to_excel ( File_exp, index= None, header= True)
 
 
-print( df2[['Caso','Calificaciï¿½n']] )
+print( df2[['Caso','Calificación']] )
 
 print( "Fin Pruebas")
 
